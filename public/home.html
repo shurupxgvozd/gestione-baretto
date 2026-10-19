@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benvenuto | Gestione Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/home.css" />
+    <script src="/home.js" defer></script>
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard home-dashboard">
+      <header class="topbar home-header">
+        <div>
+          <p class="eyebrow">Gestione Baretto</p>
+          <h1>Benvenuto</h1>
+        </div>
+        <nav class="page-nav site-nav" aria-label="Navigazione principale">
+          <a href="/" aria-current="page">Home</a>
+          <a href="/menu.html">Menu</a>
+          <a href="/stato-ordini.html">Monitor</a>
+          <a href="/admin.html" data-admin-nav hidden>Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav hidden>Ordini</a>
+          <a href="/settings.html">Impostazioni</a>
+        </nav>
+        <p id="homeDate" class="home-date"></p>
+      </header>
+
+      <section class="home-intro" aria-labelledby="welcomeTitle">
+        <div>
+          <p class="eyebrow">Pannello operativo</p>
+          <h2 id="welcomeTitle">La giornata, sotto controllo.</h2>
+          <p class="home-copy">Qui trovi un riepilogo degli ordini in corso. Le funzioni di gestione e le preferenze sono raccolte nelle impostazioni.</p>
+          <div class="home-intro-actions">
+            <a class="home-order-link" href="/menu.html">Apri il menu <span aria-hidden="true">↗</span></a>
+            <a class="home-settings-link" href="/settings.html">Apri impostazioni <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <p id="homeUpdated" class="home-updated" role="status" aria-live="polite">Caricamento riepilogo</p>
+      </section>
+
+      <section class="home-overview" aria-labelledby="ordersTodayTitle">
+        <div class="home-section-heading">
+          <div>
+            <p class="eyebrow">Oggi</p>
+            <h2 id="ordersTodayTitle">Ordini in corso</h2>
+          </div>
+          <span id="homeTotal" class="home-total">—</span>
+        </div>
+        <div class="home-stats">
+          <div class="home-stat"><span class="stat-mark waiting"></span><span>In attesa</span><strong id="homeWaiting">—</strong></div>
+          <div class="home-stat"><span class="stat-mark preparing"></span><span>In preparazione</span><strong id="homePreparing">—</strong></div>
+          <div class="home-stat"><span class="stat-mark completed"></span><span>Completati</span><strong id="homeCompleted">—</strong></div>
+        </div>
+        <p id="homeError" class="home-error" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </body>
+</html>

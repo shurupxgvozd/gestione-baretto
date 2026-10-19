@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impostazioni | Gestione Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard settings-dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gestione Baretto</p>
+          <h1>Impostazioni</h1>
+        </div>
+        <nav class="page-nav site-nav" aria-label="Navigazione principale">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu</a>
+          <a href="/stato-ordini.html">Monitor</a>
+          <a href="/admin.html" data-admin-nav hidden>Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav hidden>Ordini</a>
+          <a href="/settings.html" aria-current="page">Impostazioni</a>
+        </nav>
+      </header>
+
+      <section class="panel settings-page-panel" aria-labelledby="themeTitle">
+        <h2 id="themeTitle">Aspetto</h2>
+        <div class="theme-options">
+          <label><input type="radio" name="theme" value="dark" /><span>Verde bosco</span></label>
+          <label><input type="radio" name="theme" value="light" /><span>Avorio e ottone</span></label>
+        </div>
+      </section>
+
+      <section class="panel settings-page-panel" aria-labelledby="adminAccessTitle">
+        <h2 id="adminAccessTitle">Accesso amministratore</h2>
+        <form id="adminLoginForm" class="admin-login-form">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" name="password" type="password" autocomplete="current-password" required />
+          <p id="adminLoginFeedback" class="form-message" role="status" aria-live="polite"></p>
+          <button type="submit">Entra nell’amministrazione</button>
+        </form>
+        <div id="adminSessionPanel" class="admin-session-panel" hidden>
+          <a class="admin-entry" href="/admin.html">Apri pannello amministratore</a>
+          <a class="admin-entry" href="/ordini.html">Apri gestione ordini</a>
+          <button id="adminLogoutButton" class="secondary-button" type="button">Esci</button>
+        </div>
+      </section>
+
+      <section class="panel settings-page-panel" aria-labelledby="pagesTitle">
+        <h2 id="pagesTitle">Pagine</h2>
+        <div class="settings-page-links">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu clienti</a>
+          <a href="/stato-ordini.html" target="_blank" rel="noopener">Apri monitor ordini</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

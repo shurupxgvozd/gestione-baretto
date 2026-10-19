@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amministrazione | Gestione Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/admin.js" defer></script>
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gestione Baretto</p>
+          <h1>Amministrazione</h1>
+        </div>
+        <nav class="page-nav site-nav" aria-label="Navigazione principale">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu</a>
+          <a href="/stato-ordini.html">Monitor</a>
+          <a href="/admin.html" data-admin-nav aria-current="page">Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav>Ordini</a>
+          <a href="/settings.html">Impostazioni</a>
+          <button id="settingsButton" class="settings-button" type="button" aria-haspopup="dialog" aria-controls="settingsDialog">Impostazioni</button>
+        </nav>
+      </header>
+
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+      <section class="panel" aria-labelledby="prodottiTitolo">
+        <h2 id="prodottiTitolo">Prodotti</h2>
+        <form id="prodottoForm" class="form-grid">
+          <label>Nome<input type="text" name="nome" maxlength="120" required /></label>
+          <label>Categoria<input type="text" name="categoria" maxlength="80" placeholder="Caffetteria, colazione, panini…" /></label>
+          <label>Prezzo (€)<input type="number" name="prezzo" step="0.01" min="0" required /></label>
+          <label class="full-width">URL foto del prodotto<input type="url" name="immagine_url" maxlength="2048" placeholder="https://…" /><small class="field-hint">Se lasci il campo vuoto, il menu abbina una foto al nome o alla categoria. Puoi inserire qui una foto specifica.</small></label>
+          <label class="checkbox-row"><input type="checkbox" name="disponibile" checked />Disponibile</label>
+          <label class="full-width">Descrizione breve<textarea name="descrizione" rows="3" maxlength="500" placeholder="Descrivi il prodotto con parole semplici, senza dimenticare eventuali ingredienti o allergeni."></textarea></label>
+          <button type="submit">Aggiungi prodotto</button>
+        </form>
+        <div class="list-wrapper">
+          <h3>Catalogo</h3>
+          <ul id="prodottiList" class="item-list"></ul>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="personaleTitolo">
+        <h2 id="personaleTitolo">Personale</h2>
+        <form id="personaleForm" class="form-grid">
+          <label>Nome<input type="text" name="nome" maxlength="100" required /></label>
+          <label>Cognome<input type="text" name="cognome" maxlength="100" required /></label>
+          <label>Ruolo<input type="text" name="ruolo" maxlength="80" required /></label>
+          <label>Email<input type="email" name="email" maxlength="255" /></label>
+          <label>Telefono<input type="tel" name="telefono" maxlength="30" /></label>
+          <label class="checkbox-row"><input type="checkbox" name="attivo" checked />Attivo</label>
+          <button type="submit">Aggiungi personale</button>
+        </form>
+        <div class="list-wrapper">
+          <h3>Team</h3>
+          <ul id="personaleList" class="item-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+      <div class="settings-header">
+        <div>
+          <p class="eyebrow">Preferenze</p>
+          <h2 id="settingsTitle">Impostazioni</h2>
+        </div>
+        <button id="settingsClose" class="settings-close" type="button">Chiudi</button>
+      </div>
+      <section class="settings-section" aria-labelledby="themeTitle">
+        <h3 id="themeTitle">Tema</h3>
+        <div class="theme-options">
+          <label><input type="radio" name="theme" value="dark" /><span>Verde bosco</span></label>
+          <label><input type="radio" name="theme" value="light" /><span>Avorio e ottone</span></label>
+        </div>
+      </section>
+      <section class="settings-section" aria-labelledby="adminAccessTitle">
+        <h3 id="adminAccessTitle">Accesso amministratore</h3>
+        <form id="adminLoginForm" class="admin-login-form">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" name="password" type="password" autocomplete="current-password" required />
+          <p id="adminLoginFeedback" class="form-message" role="status" aria-live="polite"></p>
+          <button type="submit">Entra nell’amministrazione</button>
+        </form>
+        <div id="adminSessionPanel" class="admin-session-panel" hidden>
+          <a class="admin-entry" href="/admin.html">Apri pannello amministratore</a>
+          <button id="adminLogoutButton" class="secondary-button" type="button">Esci</button>
+        </div>
+      </section>
+      <section class="settings-section" aria-labelledby="pagesTitle">
+        <h3 id="pagesTitle">Pagine</h3>
+        <div class="settings-page-links">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu clienti</a>
+          <a href="/ordini.html">Gestione ordini</a>
+          <a href="/stato-ordini.html" target="_blank" rel="noopener">Monitor ordini</a>
+        </div>
+      </section>
+    </dialog>
+  </body>
+</html>

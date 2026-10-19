@@ -1,0 +1,164 @@
+.status-dashboard {
+  max-width: 1180px;
+}
+
+.status-header {
+  align-items: flex-end;
+}
+
+.last-update {
+  margin: 0;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.status-message {
+  min-height: 1.4em;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.status-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: 14px;
+}
+
+.status-order {
+  min-width: 0;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  animation: order-arrive 240ms ease-out both;
+}
+
+.status-order-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.order-number {
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-in_attesa {
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 38%, transparent);
+}
+
+.status-in_preparazione {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.status-completato {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 42%, transparent);
+}
+
+.order-product {
+  margin: 17px 0 20px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.progress-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.progress-steps li {
+  position: relative;
+  padding-top: 19px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.progress-steps li::before {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  content: "";
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.progress-steps li:not(:last-child)::after {
+  position: absolute;
+  top: 4px;
+  left: calc(50% + 6px);
+  width: calc(100% - 12px);
+  height: 2px;
+  content: "";
+  background: var(--line);
+}
+
+.progress-steps li.is-complete::before,
+.progress-steps li.is-complete::after {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.progress-steps li.is-current {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.order-time {
+  display: block;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 0.74rem;
+  text-align: right;
+}
+
+@keyframes order-arrive {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 620px) {
+  .status-header {
+    align-items: flex-start;
+  }
+
+  .last-update {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-order {
+    animation: none;
+  }
+}

@@ -1,6 +1,6 @@
 # Gestione Baretto
 
-Applicazione per la gestione di un bar. Il progetto usa Node.js, Express e MySQL 8; Docker Compose avvia il database e il server Express espone i file statici e un endpoint di stato.
+Applicazione per la gestione di un bar. Il progetto usa Node.js, Express e MySQL 8; Docker Compose avvia il database e Express espone le interfacce e le API.
 
 ## Requisiti
 
@@ -9,13 +9,14 @@ Applicazione per la gestione di un bar. Il progetto usa Node.js, Express e MySQL
 
 ## Configurazione
 
-Installa le dipendenze:
+Per l'avvio locale con Node.js, installa le dipendenze e crea la configurazione:
 
 ```sh
 npm ci
+cp .env.example .env
 ```
 
-Crea un file `.env` nella cartella principale del progetto con i parametri di connessione:
+Il file `.env` contiene i parametri di sviluppo:
 
 ```dotenv
 DB_HOST=127.0.0.1
@@ -24,31 +25,24 @@ DB_USER=utente
 DB_PASSWORD=password
 DB_NAME=baretto
 PORT=3000
+ADMIN_PASSWORD=8900
 ```
 
-`PORT` è facoltativa e predefinita a `3000`. Gli altri valori corrispondono alla configurazione di sviluppo in `docker-compose.yml`. Se modifichi utente o password, aggiorna anche le variabili `MYSQL_USER` e `MYSQL_PASSWORD` del servizio MySQL. Non condividere né aggiungere al controllo versione il file `.env`.
+`PORT` è facoltativa e predefinita a `3000`. `.env` è escluso dal controllo versione. La password admin iniziale è `8900`: cambiala prima di esporre il servizio fuori da un ambiente locale.
 
 ## Avvio
 
-Avvia il database:
+Avvia MySQL e Express con un solo comando:
 
 ```sh
-docker compose up -d mysql
+npm run dev
 ```
 
-Verifica che MySQL abbia terminato l'avvio:
+Lo script avvia il container MySQL, attende che sia pronto e poi esegue `node server.js`. In alternativa, avvia prima MySQL con `docker compose up -d mysql` e poi Express con `npm start`.
 
-```sh
-docker compose exec -T mysql mysqladmin ping -h localhost --silent
-```
+Apri `http://localhost:3000` per le impostazioni, `http://localhost:3000/stato-ordini.html` per il monitor separato oppure, dopo il login, `http://localhost:3000/admin.html` per l'amministrazione. Il servizio MySQL ha un healthcheck basato su una query autenticata; Express crea le tabelle all'avvio.
 
-Quando il comando risponde `mysqld is alive`, avvia Express:
-
-```sh
-npm start
-```
-
-All'avvio vengono create o verificate le tabelle `prodotti`, `personale` e `ordini`; quelle già esistenti non vengono svuotate. Il server resta in ascolto su `http://localhost:3000` (o sulla porta impostata in `PORT`). La cartella `public` è servita alla radice e `GET /api/health` verifica anche la connessione al database:
+All'avvio vengono create o verificate le tabelle `prodotti`, `personale` e `ordini`; quelle già esistenti non vengono svuotate. `GET /api/health` verifica anche la connessione al database:
 
 ```sh
 curl http://localhost:3000/api/health
@@ -68,6 +62,16 @@ Per controllare direttamente le tabelle del database:
 docker exec -it mysql-dev mysql -uutente -ppassword -Dbaretto
 ```
 
-## Stato dell'applicazione
+## Interfacce
 
-Al momento `npm start` esegue solo l'inizializzazione del database e termina; il server HTTP/API e l'interfaccia web non sono ancora implementati.
+- `/` e `/settings.html`: impostazioni tema e accesso admin con password.
+- `/menu.html`: menu pubblico con immagini, prezzi, carrello e invio dell'ordine. Il pagamento viene regolato al banco, non online.
+- Il tema predefinito usa verde bosco e ottone; dalle impostazioni si può scegliere la variante chiara avorio e ottone. La navigazione mostra le pagine operative dopo l'accesso admin.
+- `/admin.html`: gestione prodotti e personale, protetta da sessione.
+- `/ordini.html`: gestione ordini, protetta da sessione.
+- `/stato-ordini.html`: monitor pubblico in sola lettura, aggiornato automaticamente.
+- `/api/health`: stato della connessione a MySQL.
+
+Per mostrare una foto specifica nel menu, inserisci il relativo URL immagine nel campo prodotto del pannello amministratore. Se manca, il menu prova una foto in base al nome del prodotto e poi alla categoria. Le descrizioni inserite nel catalogo vengono mostrate sulle schede; se sono vuote, il menu usa un testo breve neutro.
+
+Per popolare un catalogo locale dimostrativo, avvia prima MySQL e poi esegui `npm run seed:demo-menu`. Il comando aggiunge dieci prodotti con immagini e prezzi indicativi solo se il catalogo è vuoto; i prezzi demo vanno verificati prima dell'uso reale e il comando non modifica prodotti già presenti.

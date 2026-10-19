@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f1e9" />
+    <title>Menu | Il Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/menu.css" />
+    <script src="/menu.js" defer></script>
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="menu-shell">
+      <header class="menu-header">
+        <a class="menu-brand" href="/" aria-label="Il Baretto, home">
+          <span class="brand-mark" aria-hidden="true">B.</span>
+          <span><strong>Il Baretto</strong><small>Ordina al banco, senza attesa</small></span>
+        </a>
+        <nav class="menu-page-nav" aria-label="Navigazione principale">
+          <a href="/">Home</a>
+          <a href="/menu.html" aria-current="page">Menu</a>
+          <a href="/stato-ordini.html">Monitor</a>
+          <a href="/admin.html" data-admin-nav hidden>Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav hidden>Ordini</a>
+          <a href="/settings.html">Impostazioni</a>
+        </nav>
+        <a class="cart-jump" href="#carrello" aria-label="Vai al carrello">
+          <span>Il tuo ordine</span><span id="headerCartCount" class="cart-count">0</span>
+        </a>
+      </header>
+
+      <section class="menu-intro" aria-labelledby="menuTitle">
+        <div>
+          <p class="menu-kicker">Il banco del Baretto</p>
+          <h1 id="menuTitle">Menu</h1>
+          <p>Caffè, qualcosa di buono e una pausa tutta tua. Ordina qui, ritira al banco.</p>
+        </div>
+        <span class="intro-stamp" aria-hidden="true">ORDINA<br />&amp; RITIRA</span>
+      </section>
+
+      <div class="menu-content">
+        <section class="catalog" aria-labelledby="catalogTitle">
+          <div class="catalog-heading">
+            <div><p class="menu-kicker">La selezione</p><h2 id="catalogTitle">Scegli i tuoi preferiti</h2></div>
+            <label class="menu-search"><span class="visually-hidden">Cerca nel menu</span><input id="menuSearch" type="search" placeholder="Cerca un prodotto" autocomplete="off" /></label>
+          </div>
+          <nav id="categoryFilters" class="category-filters" aria-label="Categorie del menu"></nav>
+          <p id="menuFeedback" class="menu-feedback" role="status" aria-live="polite">Caricamento del menu…</p>
+          <div id="productGrid" class="product-grid"></div>
+        </section>
+
+        <aside id="carrello" class="cart-panel" aria-labelledby="cartTitle">
+          <div class="cart-heading"><div><p class="menu-kicker">Pronto quando vuoi</p><h2 id="cartTitle">Il tuo ordine</h2></div><span id="cartItemCount" class="cart-item-count">0 articoli</span></div>
+          <div id="cartEmpty" class="cart-empty"><span class="empty-doodle" aria-hidden="true">＋</span><p>Il carrello è vuoto.</p><span>Aggiungi qualcosa dal menu.</span></div>
+          <ul id="cartItems" class="cart-items" aria-label="Prodotti nel carrello"></ul>
+          <div class="cart-summary"><span>Totale</span><strong id="cartTotal">€ 0,00</strong></div>
+          <fieldset class="payment-options">
+            <legend>Come paghi?</legend>
+            <label class="payment-choice"><input type="radio" name="payment_method" value="contanti" checked /><span class="payment-symbol" aria-hidden="true">€</span><span><strong>Contanti</strong><small>Al ritiro</small></span></label>
+            <label class="payment-choice"><input type="radio" name="payment_method" value="carta" /><span class="payment-symbol card-symbol" aria-hidden="true">▰</span><span><strong>Carta</strong><small>Al banco</small></span></label>
+          </fieldset>
+          <p class="payment-note">Il pagamento si completa al banco al momento del ritiro.</p>
+          <button id="checkoutButton" class="checkout-button" type="button" disabled><span>Invia ordine</span><span aria-hidden="true">↗</span></button>
+          <p id="orderFeedback" class="order-feedback" role="status" aria-live="polite"></p>
+        </aside>
+      </div>
+      <footer class="menu-footer"><span>Il Baretto</span><a href="/">Gestione locale</a></footer>
+    </main>
+  </body>
+</html>

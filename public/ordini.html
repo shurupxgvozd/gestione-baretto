@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordini | Gestione Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/ordini.css" />
+    <script src="/ordini.js" defer></script>
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard orders-dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gestione Baretto</p>
+          <h1>Ordini</h1>
+        </div>
+        <nav class="page-nav site-nav" aria-label="Navigazione principale">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu</a>
+          <a href="/stato-ordini.html">Monitor</a>
+          <a href="/admin.html" data-admin-nav>Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav aria-current="page">Ordini</a>
+          <a href="/settings.html">Impostazioni</a>
+          <button id="settingsButton" class="settings-button" type="button" aria-haspopup="dialog" aria-controls="settingsDialog">Impostazioni</button>
+        </nav>
+      </header>
+
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+      <section class="panel" aria-labelledby="nuovoOrdineTitolo">
+        <h2 id="nuovoOrdineTitolo">Nuovo ordine</h2>
+        <form id="ordineForm" class="form-grid">
+          <label>Prodotto<select name="prodotto_id" required></select></label>
+          <label>Quantità<input type="number" name="quantita" min="1" step="1" value="1" required /></label>
+          <label>Addetto<select name="personale_id"><option value="">Non assegnato</option></select></label>
+          <p id="prezzoProdotto" class="price-preview">Seleziona un prodotto</p>
+          <label class="full-width">Nota<textarea name="note" rows="2" maxlength="500"></textarea></label>
+          <button type="submit">Registra ordine</button>
+        </form>
+      </section>
+
+      <section class="panel orders-panel" aria-labelledby="ordiniAttiviTitolo">
+        <div class="orders-heading">
+          <h2 id="ordiniAttiviTitolo">Registro ordini</h2>
+          <button id="refreshButton" class="secondary-button" type="button" aria-label="Aggiorna ordini">Aggiorna</button>
+        </div>
+        <div class="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr><th>Ordine</th><th>Prodotto</th><th>Quantità</th><th>Addetto</th><th>Totale</th><th>Pagamento</th><th>Stato</th><th>Ora</th></tr>
+            </thead>
+            <tbody id="ordiniList"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+      <div class="settings-header">
+        <div>
+          <p class="eyebrow">Preferenze</p>
+          <h2 id="settingsTitle">Impostazioni</h2>
+        </div>
+        <button id="settingsClose" class="settings-close" type="button">Chiudi</button>
+      </div>
+      <section class="settings-section" aria-labelledby="themeTitle">
+        <h3 id="themeTitle">Tema</h3>
+        <div class="theme-options">
+          <label><input type="radio" name="theme" value="dark" /><span>Verde bosco</span></label>
+          <label><input type="radio" name="theme" value="light" /><span>Avorio e ottone</span></label>
+        </div>
+      </section>
+      <section class="settings-section" aria-labelledby="adminAccessTitle">
+        <h3 id="adminAccessTitle">Accesso amministratore</h3>
+        <form id="adminLoginForm" class="admin-login-form">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" name="password" type="password" autocomplete="current-password" required />
+          <p id="adminLoginFeedback" class="form-message" role="status" aria-live="polite"></p>
+          <button type="submit">Entra nell’amministrazione</button>
+        </form>
+        <div id="adminSessionPanel" class="admin-session-panel" hidden>
+          <a class="admin-entry" href="/admin.html">Apri pannello amministratore</a>
+          <button id="adminLogoutButton" class="secondary-button" type="button">Esci</button>
+        </div>
+      </section>
+      <section class="settings-section" aria-labelledby="pagesTitle">
+        <h3 id="pagesTitle">Pagine</h3>
+        <div class="settings-page-links">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu clienti</a>
+          <a href="/ordini.html" aria-current="page">Gestione ordini</a>
+          <a href="/stato-ordini.html" target="_blank" rel="noopener">Monitor ordini</a>
+        </div>
+      </section>
+    </dialog>
+  </body>
+</html>

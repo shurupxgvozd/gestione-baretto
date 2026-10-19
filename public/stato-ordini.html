@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="1800" />
+    <title>Stato ordini | Gestione Baretto</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/stato-ordini.css" />
+    <script src="/stato-ordini.js" defer></script>
+    <script src="/settings.js" defer></script>
+  </head>
+  <body>
+    <main class="dashboard status-dashboard">
+      <header class="topbar status-header">
+        <div>
+          <p class="eyebrow">Gestione Baretto · Monitor live</p>
+          <h1>Stato ordini</h1>
+        </div>
+        <nav class="page-nav site-nav" aria-label="Navigazione principale">
+          <a href="/">Home</a>
+          <a href="/menu.html">Menu</a>
+          <a href="/stato-ordini.html" aria-current="page">Monitor</a>
+          <a href="/admin.html" data-admin-nav hidden>Amministrazione</a>
+          <a href="/ordini.html" data-admin-nav hidden>Ordini</a>
+          <a href="/settings.html">Impostazioni</a>
+        </nav>
+        <p id="lastUpdate" class="last-update" aria-live="polite">Aggiornamento in corso</p>
+      </header>
+
+      <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+      <section id="ordersBoard" class="status-board" aria-label="Avanzamento ordini"></section>
+    </main>
+  </body>
+</html>
